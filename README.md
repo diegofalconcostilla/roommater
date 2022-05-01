@@ -1,0 +1,2 @@
+[![diegofalconcostilla](https://circleci.com/gh/diegofalconcostilla/roommater.svg?style=svg)](https://app.circleci.com/pipelines/github/diegofalconcostilla)
+[![codecov](https://codecov.io/gh/diegofalconcostilla/roommater/branch/main/graph/badge.svg?token=VS9HF9UC48)](https://codecov.io/gh/diegofalconcostilla/roommater)
