@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">Roommater</string>
+    <string name="textview_second">Falcon, Diego 4/19/2022</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="date">%1$d/%2$d/%3$d</string>
+    <string name="submit">Submit</string>
+    <string name="select_your_birthdate">Select your Birthdate</string>
+    <string name="ageError">User needs to be at least 18 years old</string>
+    <string name="inputError">Please fill all the fields</string>
+    <string name="validEmail">Please add a valid email</string>
+    <string name="noBirthdate">Please select your birthdate</string>
+    <string name="Back">Back</string>
+    <string name="Description">Description</string>
+    <string name="Occupation">Occupation</string>
+    <string name="Profile">Profile</string>
+    <string name="Matches">Matches</string>
+    <string name="Settings">Settings</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="matches_description">This is where matches will go</string>
+    <string name="settings_description">This is where settings will go</string>
+    <string name="secondary_text">Secondary Text</string>
+    <string name="title">Title</string>
+    <string name="matchedImage">This is the matched image</string>
+    <string name="random_person">random person</string>
+    <string name="random_person_2">random person 2</string>
+    <string name="liked_message">You liked: %s</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="hello">Hello and Welcome</string>
+    <string name="Role">Role</string>
+    <string name="Hobbies">Hobbies</string>
+    <string name="Logout">Logout</string>
 </resources>
