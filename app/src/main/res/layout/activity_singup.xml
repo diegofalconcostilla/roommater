@@ -21,51 +21,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
-        app:layout_constraintBottom_toTopOf="@id/username"
+        app:layout_constraintBottom_toTopOf="@id/age"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/names" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/username"
-        app:layout_constraintBottom_toTopOf="@id/occupation"
+        android:hint="@string/age"
+        app:layout_constraintBottom_toTopOf="@id/zip"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email" />
 
     <EditText
-        android:id="@+id/occupation"
+        android:id="@+id/zip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/Role"
-        app:layout_constraintBottom_toTopOf="@id/description"
+        android:hint="@string/zip"
+        app:layout_constraintBottom_toTopOf="@id/password"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username" />
+        app:layout_constraintTop_toBottomOf="@id/age" />
 
     <EditText
-        android:id="@+id/description"
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/Hobbies"
+        android:hint="@string/password"
         app:layout_constraintBottom_toTopOf="@id/date_picker_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/occupation" />
+        app:layout_constraintTop_toBottomOf="@id/zip" />
 
     <Button
         android:id="@+id/date_picker_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_your_birthdate"
-        android:onClick="datePicker"
+        android:onClick="onDobClick"
         app:layout_constraintBottom_toTopOf="@id/dateOfBirth"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description" />
+        app:layout_constraintTop_toBottomOf="@id/password" />
 
     <TextView
         android:id="@+id/dateOfBirth"
@@ -74,18 +74,20 @@
         app:layout_constraintBottom_toTopOf="@id/submitButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_picker_button" />
+        app:layout_constraintTop_toBottomOf="@id/date_picker_button"
+        />
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onBackClick"
+        android:onClick="onSubmit"
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dateOfBirth" />
+        app:layout_constraintTop_toBottomOf="@id/dateOfBirth"
+        />
 
 
 

@@ -8,6 +8,8 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -28,6 +30,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
         startActivity(intent);
     }
-
-
 }
