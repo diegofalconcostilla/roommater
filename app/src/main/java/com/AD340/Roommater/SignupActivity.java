@@ -127,7 +127,7 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
         intent.putExtra(Constants.USER_PASSWORD_KEY, password);
 
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     private boolean checkAge(){
