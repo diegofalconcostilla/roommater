@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:contentDescription="@string/drawer_open">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/profile_menu_item"
+            android:title="profile"
+            android:checked="true" />
+        <item
+            android:id="@+id/matches_menu_item"
+            android:title="matches" />
+
+        <item
+            android:id="@+id/settings_menu_item"
+            android:title="setting" />
+        <item
+            android:id="@+id/privacy_menu_item"
+            android:title="Privacy" />
+    </group>
+</menu>
