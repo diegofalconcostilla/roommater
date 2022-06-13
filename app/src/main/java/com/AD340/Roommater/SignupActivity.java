@@ -108,11 +108,11 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    //alert.dismiss();
+                    alert.dismiss();
                     //TO DO send user to other activity
-                    Toast.makeText(SignupActivity.this,"Signed up sucssefully", Toast.LENGTH_SHORT);
+                    Log.d(TAG, "createUserWithEmail:success");
                 }else{
-                    //alert.dismiss();
+                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     Toast.makeText(SignupActivity.this,""+task.getException(), Toast.LENGTH_SHORT);
 
                 }

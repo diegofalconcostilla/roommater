@@ -54,7 +54,8 @@
         app:layout_constraintBottom_toTopOf="@id/date_picker_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/zip" />
+        app:layout_constraintTop_toBottomOf="@id/zip"
+        app:passwordToggleEnabled="true"/>
 
     <Button
         android:id="@+id/date_picker_button"
