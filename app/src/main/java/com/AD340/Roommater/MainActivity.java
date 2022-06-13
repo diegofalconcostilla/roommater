@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
         startActivity(intent);
     }
+
     private void updateUI(FirebaseUser user) {
     }
 
