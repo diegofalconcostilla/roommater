@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="threehundred">300dp</dimen>
+    <dimen name="twenty">20dp</dimen>
+    <dimen name="thirtysp">30sp</dimen>
+    <dimen name="twentyfivesp">25sp</dimen>
+    <dimen name="five">5dp</dimen>
+    <dimen name="elevation">2dp</dimen>
+    <dimen name="matches_image_height">108dp</dimen>
+    <dimen name="card_padding_linear">16dp</dimen>
+</resources>
