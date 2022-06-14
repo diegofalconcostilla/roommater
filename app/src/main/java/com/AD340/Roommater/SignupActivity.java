@@ -104,30 +104,28 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
 //        alert.setMessage("Please wait while signing up...");
 //        alert.setCanceledOnTouchOutside(false);
 //        alert.show();
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    alert.dismiss();
-                    //TO DO send user to other activity
-                    Log.d(TAG, "createUserWithEmail:success");
-                }else{
-                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                    Toast.makeText(SignupActivity.this,""+task.getException(), Toast.LENGTH_SHORT);
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(SignupActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
 
-                }
-            }
-        });
 
-        Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
-        intent.putExtra(Constants.USER_NAME_KEY, name);
-        intent.putExtra(Constants.USER_EMAIL_KEY, email);
-        intent.putExtra(Constants.USER_AGE_KEY, ""+calculatedYear);
-        intent.putExtra(Constants.USER_ZIP_KEY, zip);
-        intent.putExtra(Constants.USER_PASSWORD_KEY, password);
-
-        startActivity(intent);
-        //finish();
     }
 
     private boolean checkAge(){
@@ -188,6 +186,10 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
             int day = c.get(Calendar.DAY_OF_MONTH);
             return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(),year, month,day);
         }
+
+    }
+
+    private void updateUI(FirebaseUser user) {
 
     }
 }

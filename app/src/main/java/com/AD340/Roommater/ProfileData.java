@@ -1,9 +1,9 @@
 package com.AD340.Roommater;
 
 public class ProfileData {
-    String name;
-    String age;
-    String zip;
+    private String name;
+    private String age;
+    private String zip;
 
     public ProfileData(String name, String age, String zip) {
         this.name = name;
