@@ -8,4 +8,6 @@
     <dimen name="elevation">2dp</dimen>
     <dimen name="matches_image_height">108dp</dimen>
     <dimen name="card_padding_linear">16dp</dimen>
+    <dimen name="twoHundredDp">200dp</dimen>
+    <dimen name="twoHundredDpHeight">200dp</dimen>
 </resources>
