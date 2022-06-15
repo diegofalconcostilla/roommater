@@ -53,5 +53,9 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="matches_image">matches_image</string>
     <string name="picture_of_the_user">Picture of the user</string>
+    <string name="mark_t">Mark T</string>
+    <string name="really_cool_dude">Really cool dude</string>
+    <string name="image_of_the_match">Image of the match</string>
+    <string name="like">Like</string>
     <string name="backgroundpicture">BackgroundPicture</string>
 </resources>

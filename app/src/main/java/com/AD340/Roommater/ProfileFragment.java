@@ -9,7 +9,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 public class ProfileFragment extends Fragment {
-    private ProfileData profileData;
+    ProfileData profileData;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -18,13 +19,11 @@ public class ProfileFragment extends Fragment {
 
         TextView name = view.findViewById(R.id.name);
         TextView age = view.findViewById(R.id.age);
-        TextView zip = view.findViewById(R.id.zip);
-
         if (this.profileData != null) {
-            name.setText(this.profileData.getName());
+            name.setText("Welcome" + this.profileData.getName());
             age.setText("" + this.profileData.getAge());
-            zip.setText(this.profileData.getZip());
         }
+
         return view;
     }
 

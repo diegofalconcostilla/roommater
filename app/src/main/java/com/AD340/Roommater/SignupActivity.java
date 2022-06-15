@@ -20,13 +20,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.ZipError;
 
 
@@ -39,6 +45,8 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
     private EditText ageField;
     private EditText zipField;
     private EditText passwordField;
+    private TextView dobTextView;
+    private FirebaseFirestore db;
 
     private int dobYear = 0;
     private int dobMonth = 0;
@@ -66,12 +74,11 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
         emailField = findViewById(R.id.email);
         ageField = findViewById(R.id.age);
         zipField = findViewById(R.id.zip);
+        dobTextView = findViewById(R.id.dateOfBirth);
         passwordField = findViewById(R.id.password);
 
         progressBar = new ProgressBar(this);
-       // alert = new AlertDialog(this);
-
-
+        db = FirebaseFirestore.getInstance();
 
     }
     public void onSubmit(View view) {
@@ -99,11 +106,17 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
             Toast.makeText(getApplicationContext(), getString(R.string.eighteen_error), Toast.LENGTH_LONG).show();
             return;
         }
-        // TO DO VALIDATE zip
-//        alert.setTitle("Sign up");
-//        alert.setMessage("Please wait while signing up...");
-//        alert.setCanceledOnTouchOutside(false);
-//        alert.show();
+
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate dateOfBirth = LocalDate.of(dobYear, dobMonth, dobDay);
+        int years = Period.between(dateOfBirth, currentDate).getYears();
+
+        if (years < 18) {
+            Toast.makeText(getApplicationContext(), getString(R.string.eighteen_error),
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -113,8 +126,31 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
+                            Map<String, Object> newUser = new HashMap<>();
+                            newUser.put("name", name);
+                            newUser.put("email", email);
+                            newUser.put("age", age);
+                            newUser.put("zip", zip);
+                            newUser.put("password", password);
+                            System.out.println(user.getUid());
+                            db.collection("users").add(user.getUid());
+                            db.collection("users").document(user.getUid())
+                                    .set(newUser)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error writing document", e);
+                                        }
+                                    });
+
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -143,14 +179,14 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(Constants.USER_AGE_KEY, ageField.getText().toString());
+        outState.putString(Constants.AGE_KEY, ageField.getText().toString());
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState.containsKey(Constants.USER_AGE_KEY)) {
-            ageField.setText(savedInstanceState.getString(Constants.USER_AGE_KEY));
+        if (savedInstanceState.containsKey(Constants.AGE_KEY)) {
+            ageField.setText(savedInstanceState.getString(Constants.AGE_KEY));
         }
     }
 
@@ -173,7 +209,7 @@ public class SignupActivity extends AppCompatActivity implements DatePickerDialo
         dobYear = year;
         dobMonth = month;
         dobDay = day;
-        ageField.setText(month + getString(R.string.text_slash_symbol)+ day + getString(R.string.text_slash_symbol)+ year);
+        dobTextView.setText(month + getString(R.string.text_slash_symbol)+ day + getString(R.string.text_slash_symbol)+ year);
     }
 
     public static class DatePickerFragment extends DialogFragment  {

@@ -1,5 +1,3 @@
-
-
 package com.AD340.Roommater;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -26,27 +24,14 @@ import org.junit.runner.RunWith;
 public class MainActivityTest {
 
     @Rule
-    public ActivityScenarioRule<MainActivity> mainActivityRule = new ActivityScenarioRule<>(MainActivity.class);
-
-
-/*
-    @Test
-    public void checkingSubmitButton(){
-        onView(withId(R.id.login_email)).perform(replaceText("zaya@yahoo.com"));
-        onView(withId(R.id.login_password)).perform(replaceText("123456"));
-
-        onView(withId(R.id.date_picker_button)).perform(click());
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2000,1,2));
-        onView(withId(android.R.id.button1)).perform(click());
-        onView(withId(R.id.submitButton)).perform(click());
-    }
+    public ActivityScenarioRule<MainActivity> mainActivityRule =
+            new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void checkingMustHaveValidEmail() {
-        onView(withId(R.id.login_email)).perform(replaceText("zaya@yahoo.com"));
-        onView(withId(R.id.login_password)).perform(replaceText("123456"));
-        onView(withId(R.id.submitButton)).perform(click());
-        onView(withText("zaya@yahoo.com")).check(doesNotExist());
+    public void checkLogin() {
+        onView(withId(R.id.login_email)).perform(replaceText("test5@gmail.com"));
+        onView(withId(R.id.login_password)).perform(replaceText("123123"));
+        onView(withId(R.id.login_email))
+                .check(matches(withText("test5@gmail.com")));
     }
-    */
-}
+} 

@@ -3,6 +3,7 @@ package com.AD340.Roommater;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -30,43 +31,38 @@ public class WelcomeActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // this displays <- which will replace later
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawer = findViewById(R.id.drawer_layout);
         drawerToggle = setupDrawerToggle();
+
         navDrawer = findViewById(R.id.navDrawer);
 
-
-        //profile data
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        ProfileData profileData = null;
-        if (bundle != null){
-            if(bundle.containsKey(Constants.USER_NAME_KEY) &&
-                    bundle.containsKey(Constants.USER_AGE_KEY) &&
-                    bundle.containsKey(Constants.USER_ZIP_KEY) ){
-                // TODO: 5/10/2022  check age
-                profileData = new ProfileData(  bundle.getString(Constants.USER_NAME_KEY),
-                        bundle.getString(Constants.USER_AGE_KEY),
-                        bundle.getString(Constants.USER_ZIP_KEY));
 
+        ProfileData profileData = null;
+        if (bundle != null) {
+            if (bundle.containsKey(Constants.USERNAME_KEY) && bundle.containsKey(Constants.AGE_KEY)) {
+
+                profileData = new ProfileData(bundle.getString(Constants.USERNAME_KEY),
+                        bundle.getInt(Constants.AGE_KEY));
             }
         }
-        setupDrawerContent(navDrawer, profileData);
-        ProfileFragment profileFragment = new ProfileFragment();
 
+        setupDrawerContent(navDrawer, profileData);
+
+        ProfileFragment profileFragment = new ProfileFragment();
         profileFragment.setProfileData(profileData);
         FragmentManager fragmentManager = getSupportFragmentManager();
-
         fragmentManager.beginTransaction().replace(R.id.content, profileFragment).commit();
-        setTitle("profile");
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
         return new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open,
                 R.string.drawer_close);
     }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -78,6 +74,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
@@ -92,7 +89,7 @@ public class WelcomeActivity extends AppCompatActivity {
     public void selectDrawerItem(MenuItem menuItem, ProfileData profileData) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
-        switch (menuItem.getItemId()) {
+        switch(menuItem.getItemId()) {
             case R.id.profile_menu_item:
                 ProfileFragment profileFragment = new ProfileFragment();
                 profileFragment.setProfileData(profileData);
@@ -101,23 +98,16 @@ public class WelcomeActivity extends AppCompatActivity {
             case R.id.matches_menu_item:
                 fragment = new MatchesFragment();
                 break;
-            case R.id.settings_menu_item:
-                fragment = new SettingFragment();
-                break;
-            case R.id.privacy_menu_item:
-                fragment = new PrivacyFragment();
-                break;
-                
             default:
                 ProfileFragment defaultProfileFragment = new ProfileFragment();
                 defaultProfileFragment.setProfileData(profileData);
                 fragment = defaultProfileFragment;
-
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content, fragment).commit();
 
+        // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
         // Set action bar title
         setTitle(menuItem.getTitle());
@@ -127,13 +117,14 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(drawerToggle.onOptionsItemSelected(item)){
+        Log.i(WelcomeActivity.class.getSimpleName(), "" + item.getItemId());
+        if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        return    super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
-    public void onBackClick(View view){
+    public void onBackClick(View view) {
         finish();
     }
 }
