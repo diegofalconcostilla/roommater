@@ -5,17 +5,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/profile_menu_item"
-            android:title="profile"
+            android:title="Profile"
             android:checked="true" />
         <item
             android:id="@+id/matches_menu_item"
-            android:title="matches" />
+            android:title="Matches" />
 
-        <item
-            android:id="@+id/settings_menu_item"
-            android:title="setting" />
-        <item
-            android:id="@+id/privacy_menu_item"
-            android:title="Privacy" />
     </group>
 </menu>
